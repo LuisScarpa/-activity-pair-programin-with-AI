@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dino Night Run</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div id="game-wrapper">
+    <!-- Background layers -->
+    <div id="bg-stars"></div>
+    <div id="bg-moon"></div>
+    <div id="bg-clouds"></div>
+
+    <!-- HUD -->
+    <div id="hud">
+      <div id="score-box">
+        <span class="label">SCORE</span>
+        <span id="score">00000</span>
+      </div>
+      <div id="hi-box">
+        <span class="label">HI</span>
+        <span id="hi-score">00000</span>
+      </div>
+      <div id="speed-box">
+        <span class="label">SPD</span>
+        <span id="speed-display">1.0x</span>
+      </div>
+    </div>
+
+    <!-- Canvas -->
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- Overlay screens -->
+    <div id="start-screen" class="overlay">
+      <div class="overlay-content">
+        <div class="dino-logo">🦕</div>
+        <h1>DINO NIGHT RUN</h1>
+        <p class="subtitle">Um dino, uma noite, infinitas aventuras</p>
+        <div class="key-hint">
+          <span class="key">SPACE</span> ou <span class="key">↑</span> para começar
+        </div>
+        <p class="touch-hint">📱 Toque na tela para jogar</p>
+      </div>
+    </div>
+
+    <div id="game-over-screen" class="overlay hidden">
+      <div class="overlay-content">
+        <h2>GAME OVER</h2>
+        <div id="final-score-display">
+          <span class="label">PONTUAÇÃO</span>
+          <span id="final-score">0</span>
+        </div>
+        <div id="new-record" class="hidden">🏆 NOVO RECORDE!</div>
+        <div class="key-hint">
+          <span class="key">SPACE</span> ou <span class="key">↑</span> para reiniciar
+        </div>
+        <p class="touch-hint">📱 Toque na tela para reiniciar</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="entities.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

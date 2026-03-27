@@ -1,0 +1,282 @@
+/* ===========================
+   DINO NIGHT RUN — styles.css
+   =========================== */
+
+:root {
+  --bg:        #0a0e1a;
+  --bg2:       #0f1526;
+  --ground:    #1a2040;
+  --accent:    #7df9a0;
+  --accent2:   #f9e27d;
+  --text:      #e8f4ff;
+  --dim:       #4a6080;
+  --danger:    #ff4d6d;
+  --moon:      #ffeaa7;
+  --font:      'Press Start 2P', monospace;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: var(--font);
+  overflow: hidden;
+  user-select: none;
+}
+
+/* ── Wrapper ── */
+#game-wrapper {
+  position: relative;
+  width: 900px;
+  height: 320px;
+  border: 2px solid #1e2d50;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow:
+    0 0 60px #0a1530,
+    0 0 0 1px #0d1830,
+    inset 0 0 30px #060c1a;
+}
+
+/* ── Stars background ── */
+#bg-stars {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(1px 1px at 10% 15%, #fff 100%, transparent),
+    radial-gradient(1px 1px at 25% 8%,  #fff 100%, transparent),
+    radial-gradient(2px 2px at 40% 20%, rgba(255,255,255,.7) 100%, transparent),
+    radial-gradient(1px 1px at 55% 5%,  #fff 100%, transparent),
+    radial-gradient(1px 1px at 70% 18%, #fff 100%, transparent),
+    radial-gradient(2px 2px at 82% 10%, rgba(255,255,255,.6) 100%, transparent),
+    radial-gradient(1px 1px at 90% 25%, #fff 100%, transparent),
+    radial-gradient(1px 1px at 5%  35%, rgba(255,255,255,.5) 100%, transparent),
+    radial-gradient(1px 1px at 33% 40%, #fff 100%, transparent),
+    radial-gradient(1px 1px at 60% 30%, rgba(255,255,255,.8) 100%, transparent),
+    radial-gradient(1px 1px at 75% 42%, #fff 100%, transparent),
+    radial-gradient(1px 1px at 88% 38%, rgba(255,255,255,.6) 100%, transparent),
+    radial-gradient(1px 1px at 15% 55%, #fff 100%, transparent),
+    radial-gradient(1px 1px at 48% 50%, rgba(255,255,255,.7) 100%, transparent),
+    radial-gradient(1px 1px at 93% 55%, #fff 100%, transparent),
+    radial-gradient(2px 2px at 20% 70%, rgba(255,255,255,.4) 100%, transparent),
+    radial-gradient(1px 1px at 65% 65%, #fff 100%, transparent);
+  background-color: var(--bg);
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  0%   { opacity: 1; }
+  50%  { opacity: .7; }
+  100% { opacity: 1; }
+}
+
+/* ── Moon ── */
+#bg-moon {
+  position: absolute;
+  top: 14px;
+  right: 60px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fffde7, #ffd54f);
+  box-shadow:
+    0 0 20px rgba(255, 235, 100, .5),
+    0 0 40px rgba(255, 220, 50, .2);
+  z-index: 1;
+}
+
+/* ── Cloud shapes (CSS) ── */
+#bg-clouds {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Canvas ── */
+#gameCanvas {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 2;
+}
+
+/* ── HUD ── */
+#hud {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+#hud > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+#hud .label {
+  font-size: 7px;
+  color: var(--dim);
+  letter-spacing: 1px;
+}
+
+#score, #hi-score {
+  font-size: 15px;
+  color: var(--text);
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px rgba(125,249,160,.3);
+}
+
+#hi-score { color: var(--accent2); }
+
+#speed-display {
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(125,249,160,.5);
+}
+
+/* ── Overlays ── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 12, 26, .88);
+  backdrop-filter: blur(4px);
+  z-index: 20;
+  transition: opacity .3s;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.overlay-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.dino-logo {
+  font-size: 48px;
+  animation: bounce 1s ease-in-out infinite alternate;
+}
+
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-8px); }
+}
+
+h1 {
+  font-size: 22px;
+  color: var(--accent);
+  text-shadow: 0 0 16px rgba(125,249,160,.6);
+  letter-spacing: 2px;
+}
+
+h2 {
+  font-size: 20px;
+  color: var(--danger);
+  text-shadow: 0 0 16px rgba(255,77,109,.5);
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  font-size: 7px;
+  color: var(--dim);
+  letter-spacing: 1px;
+  max-width: 300px;
+  line-height: 1.8;
+}
+
+.key-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 8px;
+  color: var(--text);
+  margin-top: 4px;
+}
+
+.key {
+  display: inline-block;
+  padding: 4px 8px;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  color: var(--accent);
+  font-size: 8px;
+  box-shadow: 0 0 8px rgba(125,249,160,.3);
+}
+
+.touch-hint {
+  font-size: 7px;
+  color: var(--dim);
+}
+
+#final-score-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+#final-score-display .label {
+  font-size: 8px;
+  color: var(--dim);
+}
+
+#final-score {
+  font-size: 24px;
+  color: var(--accent2);
+  text-shadow: 0 0 12px rgba(249,226,125,.5);
+}
+
+#new-record {
+  font-size: 9px;
+  color: var(--accent2);
+  text-shadow: 0 0 10px rgba(249,226,125,.6);
+  animation: pulse 1s ease-in-out infinite alternate;
+}
+
+#new-record.hidden { display: none; }
+
+@keyframes pulse {
+  from { opacity: .6; transform: scale(.98); }
+  to   { opacity: 1;  transform: scale(1.02); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 920px) {
+  #game-wrapper {
+    width: 100vw;
+    height: 260px;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  h1 { font-size: 16px; }
+  #score, #hi-score { font-size: 12px; }
+}
